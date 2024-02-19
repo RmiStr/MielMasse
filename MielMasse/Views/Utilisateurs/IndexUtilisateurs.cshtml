@@ -1,0 +1,35 @@
+﻿@model List<MielMasse.Models.Domain.Utilisateur>
+
+@{
+}
+
+<h1>Utilisateurs</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Gsm</th>
+            <th>Adresse</th>
+            <th>Parrain</th>
+            <th>Filleuls</th>
+            <th>Primes usées</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var utilisateur in Model)
+        {
+            <tr>
+                <td>@utilisateur.Nom</td>
+                <td>@utilisateur.Gsm</td>
+                <td>@utilisateur.Adresse</td>
+                <td>@utilisateur.Parrain</td>
+                <td>@utilisateur.NbFilleuls</td>
+                <td>@utilisateur.NbFilleulsUsed</td>
+                <td>@utilisateur.Status</td>
+                <td><a asp-action="ViewUtilisateur" asp-route-id="@utilisateur.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

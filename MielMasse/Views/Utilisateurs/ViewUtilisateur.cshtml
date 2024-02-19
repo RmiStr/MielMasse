@@ -1,0 +1,52 @@
+﻿@model MielMasse.Models.UpdateUtilisateurViewModel;
+
+
+@{
+}
+
+<h1>Editer Utilisateur</h1>
+
+<form method="post" asp-action="View" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Nom</label>
+        <input type="text" class="form-control" asp-for="Nom">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Gsm</label>
+        <input type="text" class="form-control" asp-for="Gsm">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Adresse</label>
+        <input type="text" class="form-control" asp-for="Adresse">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Parrain</label>
+        <input type="search" class="form-control" asp-for="Parrain" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Nb de filleuls</label>
+        <input type="number" class="form-control" asp-for="NbFilleuls" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Nb de filleuls utilisés</label>
+        <input type="number" class="form-control" asp-for="NbFilleulsUsed">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Status</label>
+        <input type="text" class="form-control" asp-for="Status">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Préférences</label>
+        <input type="text" class="form-control" asp-for="Preferences">
+    </div>
+
+    <button type="submit" class="btn btn-primary" asp-action="">Submit</button>
+
+    <button type="submit" class="btn btn-danger" 
+                asp-action="Delete"
+                asp-controller="Utilisateurs"> Delete</button>
+</form>

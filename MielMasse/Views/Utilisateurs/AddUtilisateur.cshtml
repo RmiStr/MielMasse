@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model MielMasse.Models.AddUtilisateurViewModel
+
+@{
+}
+<h1>Ajouter Utilisateur</h1>
+
+<form method="post" action="AddUtilisateur" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Nom</label>
+        <input type="text" class="form-control" asp-for="Nom">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Gsm</label>
+        <input type="text" class="form-control" asp-for="Gsm">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Adresse</label>
+        <input type="text" class="form-control" asp-for="Adresse">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Parrain</label>
+        <input type="search" class="form-control" asp-for="Parrain">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Status</label>
+        <input type="text" class="form-control" asp-for="Status">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Préférences</label>
+        <input type="text" class="form-control" asp-for="Preferences">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
