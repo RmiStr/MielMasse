@@ -52,55 +52,25 @@ namespace MielMasse.Controllers
             return View(await utilisateurs.AsNoTracking().ToListAsync());
         }
 
-        /*
-        public async Task<IActionResult> Index(string sortOrder)
-        {
-            ViewData["NomSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Nom_desc" : "";
-            ViewData["GsmSortParm"] = sortOrder == "Gsm" ? "Gsm_desc" : "Gsm";
-            var utilisateurs = from u in _context.Utilisateurs
-                               select u;
-            switch (sortOrder)
-            {
-                case "Nom_desc":
-                    utilisateurs = utilisateurs.OrderByDescending(u => u.Nom);
-                    break;
-                case "Gsm":
-                    utilisateurs = utilisateurs.OrderBy(u => u.Gsm);
-                    break;
-                case "Gsm_desc":
-                    utilisateurs = utilisateurs.OrderByDescending(u => u.Gsm);
-                    break;
-                default:
-                    utilisateurs = utilisateurs.OrderBy(u => u.Nom);
-                    break;
-            }
-            return View(await utilisateurs.AsNoTracking().ToListAsync());
-        }*/
-
-        /*
-        public async Task<IActionResult> IndexUtilisateurs()
-        {
-            var utilisateurs = await mielMasseDbContext.Utilisateurs.ToListAsync();
-            return View(utilisateurs);
-        }*/
-
 
         [HttpGet]
         public IActionResult AddUtilisateur()
         {
+            ViewBag.Users = _context.Utilisateurs;
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> AddUtilisateur(AddUtilisateurViewModel addUtilisateurRequest)
         {
+            ViewBag.Users = _context.Utilisateurs;
             var utilisateur = new Utilisateur()
             {
                 Id = Guid.NewGuid(),
                 Nom = addUtilisateurRequest.Nom,
                 Gsm = addUtilisateurRequest.Gsm,
                 Adresse = addUtilisateurRequest.Adresse,
-                Parrain = addUtilisateurRequest.Parrain,
+                ParrainNom = addUtilisateurRequest.ParrainNom,
                 NbFilleuls = addUtilisateurRequest.NbFilleuls,
                 NbFilleulsUsed = addUtilisateurRequest.NbFilleulsUsed,
                 Status = addUtilisateurRequest.Status,

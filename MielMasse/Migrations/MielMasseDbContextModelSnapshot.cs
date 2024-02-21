@@ -45,7 +45,7 @@ namespace MielMasse.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ParrainId")
+                    b.Property<Guid?>("ParrainNom")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Preferences")
@@ -56,7 +56,7 @@ namespace MielMasse.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParrainId");
+                    b.HasIndex("ParrainNom");
 
                     b.ToTable("Utilisateurs");
                 });
@@ -65,7 +65,7 @@ namespace MielMasse.Migrations
                 {
                     b.HasOne("MielMasse.Models.Domain.Utilisateur", "Parrain")
                         .WithMany()
-                        .HasForeignKey("ParrainId");
+                        .HasForeignKey("ParrainNom");
 
                     b.Navigation("Parrain");
                 });

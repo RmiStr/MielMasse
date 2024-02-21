@@ -13,6 +13,7 @@ namespace MielMasse.Models.Domain
         public string Gsm { get; set; }
         public string? Adresse { get; set; }
         public Utilisateur? Parrain { get; set; }
+        public string? ParrainNom { get; set; }
         public int NbFilleuls { get; set; }
         public int NbFilleulsUsed { get; set; }
         public string? Status { get; set; }

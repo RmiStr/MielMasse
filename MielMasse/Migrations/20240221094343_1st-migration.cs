@@ -19,7 +19,7 @@ namespace MielMasse.Migrations
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gsm = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Adresse = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParrainId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ParrainNom = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     NbFilleuls = table.Column<int>(type: "int", nullable: false),
                     NbFilleulsUsed = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -29,16 +29,16 @@ namespace MielMasse.Migrations
                 {
                     table.PrimaryKey("PK_Utilisateurs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Utilisateurs_Utilisateurs_ParrainId",
-                        column: x => x.ParrainId,
+                        name: "FK_Utilisateurs_Utilisateurs_ParrainNom",
+                        column: x => x.ParrainNom,
                         principalTable: "Utilisateurs",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Utilisateurs_ParrainId",
+                name: "IX_Utilisateurs_ParrainNom",
                 table: "Utilisateurs",
-                column: "ParrainId");
+                column: "ParrainNom");
         }
 
         /// <inheritdoc />

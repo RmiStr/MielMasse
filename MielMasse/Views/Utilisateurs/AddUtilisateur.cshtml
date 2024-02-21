@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@model MielMasse.Models.AddUtilisateurViewModel
+﻿@model MielMasse.Models.AddUtilisateurViewModel
 
 @{
 }
@@ -21,10 +17,16 @@
         <label for="" class="form-label">Adresse</label>
         <input type="text" class="form-control" asp-for="Adresse">
     </div>
+
     <div class="mb-3">
-        <label for="" class="form-label">Parrain</label>
-        <input type="search" class="form-control" asp-for="Parrain">
+        <select asp-for="ParrainNom">
+            @foreach (var utilisateur in ViewBag.Users)
+            {
+                <option value="@utilisateur.Nom">@utilisateur.Nom</option>
+            }
+        </select>
     </div>
+
     <div class="mb-3">
         <label for="" class="form-label">Status</label>
         <input type="text" class="form-control" asp-for="Status">
