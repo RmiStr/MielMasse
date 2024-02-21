@@ -9,19 +9,81 @@ namespace MielMasse.Controllers
 {
     public class UtilisateursController : Controller
     {
-        private readonly MielMasseDbContext mielMasseDbContext;
+        private readonly MielMasseDbContext _context;
 
         public UtilisateursController(MielMasseDbContext mielMasseDbContext)
         {
-            this.mielMasseDbContext = mielMasseDbContext;
+            _context = mielMasseDbContext;
         }
 
         [HttpGet]
+        public async Task<IActionResult> IndexUtilisateurs(string SortOrder, string SearchString)
+        {
+            ViewData["CurrentFilter"] = SearchString;
+            var utilisateurs = from u in _context.Utilisateurs
+                               select u;
+            if(!String.IsNullOrEmpty(SearchString))
+            {
+                utilisateurs = utilisateurs.Where(u => u.Nom.Contains(SearchString));
+            }
+
+
+            ViewData["NomSortParam"] = String.IsNullOrEmpty(SortOrder) ? "nom_sort_desc" : "";
+            ViewData["GsmSortParam"] = SortOrder == "gsm_sort" ? "gsm_sort_desc" : "gsm_sort";
+
+            switch (SortOrder)
+            {
+                case "gsm_sort_desc":
+                    utilisateurs = utilisateurs.OrderByDescending(u => u.Gsm);
+                    break;
+                case "gsm_sort":
+                    utilisateurs = utilisateurs.OrderBy(u => u.Gsm);
+                    //ViewData["GsmSortParam"] = String.Empty;
+                    break;
+                case "nom_sort_desc":
+                    utilisateurs = utilisateurs.OrderByDescending(u => u.Nom);
+                    break;
+                case "":
+                default: utilisateurs = utilisateurs.OrderBy(u => u.Nom);
+                    break;
+
+            }
+
+            return View(await utilisateurs.AsNoTracking().ToListAsync());
+        }
+
+        /*
+        public async Task<IActionResult> Index(string sortOrder)
+        {
+            ViewData["NomSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Nom_desc" : "";
+            ViewData["GsmSortParm"] = sortOrder == "Gsm" ? "Gsm_desc" : "Gsm";
+            var utilisateurs = from u in _context.Utilisateurs
+                               select u;
+            switch (sortOrder)
+            {
+                case "Nom_desc":
+                    utilisateurs = utilisateurs.OrderByDescending(u => u.Nom);
+                    break;
+                case "Gsm":
+                    utilisateurs = utilisateurs.OrderBy(u => u.Gsm);
+                    break;
+                case "Gsm_desc":
+                    utilisateurs = utilisateurs.OrderByDescending(u => u.Gsm);
+                    break;
+                default:
+                    utilisateurs = utilisateurs.OrderBy(u => u.Nom);
+                    break;
+            }
+            return View(await utilisateurs.AsNoTracking().ToListAsync());
+        }*/
+
+        /*
         public async Task<IActionResult> IndexUtilisateurs()
         {
             var utilisateurs = await mielMasseDbContext.Utilisateurs.ToListAsync();
             return View(utilisateurs);
-        }
+        }*/
+
 
         [HttpGet]
         public IActionResult AddUtilisateur()
@@ -47,15 +109,15 @@ namespace MielMasse.Controllers
 
             
 
-            await mielMasseDbContext.Utilisateurs.AddAsync(utilisateur);
-            await mielMasseDbContext.SaveChangesAsync();
+            await _context.Utilisateurs.AddAsync(utilisateur);
+            await _context.SaveChangesAsync();
             return RedirectToAction("IndexUtilisateurs");
         }
 
         [HttpGet]
         public async Task<IActionResult> ViewUtilisateur(Guid id)
         {
-            var utilisateur = await mielMasseDbContext.Utilisateurs.FirstOrDefaultAsync(x => x.Id == id);
+            var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(x => x.Id == id);
 
             if (utilisateur != null)
             {
@@ -80,7 +142,7 @@ namespace MielMasse.Controllers
         [HttpPost]
         public async Task<IActionResult> View(UpdateUtilisateurViewModel model)
         {
-            var utilisateur = await mielMasseDbContext.Utilisateurs.FindAsync(model.Id);
+            var utilisateur = await _context.Utilisateurs.FindAsync(model.Id);
 
             if (utilisateur != null)
             {
@@ -93,7 +155,7 @@ namespace MielMasse.Controllers
                 utilisateur.Status = model.Status;
                 utilisateur.Preferences = model.Preferences;
 
-                await mielMasseDbContext.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("IndexUtilisateurs");
             }
@@ -104,12 +166,12 @@ namespace MielMasse.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(UpdateUtilisateurViewModel model)
         {
-            var utilisateur = mielMasseDbContext.Utilisateurs.Find(model.Id);
+            var utilisateur = _context.Utilisateurs.Find(model.Id);
 
             if (utilisateur != null)
             {
-                mielMasseDbContext.Utilisateurs.Remove(utilisateur);
-                await mielMasseDbContext.SaveChangesAsync();
+                _context.Utilisateurs.Remove(utilisateur);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("IndexUtilisateurs");
             }

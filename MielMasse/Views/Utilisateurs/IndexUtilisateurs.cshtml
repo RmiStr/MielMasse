@@ -5,11 +5,22 @@
 
 <h1>Utilisateurs</h1>
 
+<form asp-action="IndexUtilisateurs" method="get">
+    <div class="form-group">
+        <label for="SearchString">Recherche Nom : </label>
+        <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+
+
 <table class="table">
     <thead>
         <tr>
-            <th>Nom</th>
-            <th>Gsm</th>
+            <th><a asp-action="IndexUtilisateurs" asp-route-sortOrder="@ViewData["NomSortParam"]">
+                Nom</a></th>
+            <th><a asp-action="IndexUtilisateurs" asp-route-sortOrder="@ViewData["GsmSortParam"]">
+                Gsm</a></th>
             <th>Adresse</th>
             <th>Parrain</th>
             <th>Filleuls</th>
