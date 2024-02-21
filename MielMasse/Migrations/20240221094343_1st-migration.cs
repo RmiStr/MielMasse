@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MielMasse.Migrations
 {
     /// <inheritdoc />
-    public partial class _1thMigration : Migration
+    public partial class _1stmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

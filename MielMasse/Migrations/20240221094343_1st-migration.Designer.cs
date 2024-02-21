@@ -12,8 +12,8 @@ using MielMasse.Data;
 namespace MielMasse.Migrations
 {
     [DbContext(typeof(MielMasseDbContext))]
-    [Migration("20240219123644_1th Migration")]
-    partial class _1thMigration
+    [Migration("20240221094343_1st-migration")]
+    partial class _1stmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

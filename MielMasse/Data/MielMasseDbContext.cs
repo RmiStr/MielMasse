@@ -11,5 +11,6 @@ namespace MielMasse.Data
         }
 
         public DbSet<Utilisateur> Utilisateurs { get; set; }
+        public DbSet<Rdv> Rdvs { get; set; }
     }
 }
