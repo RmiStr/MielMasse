@@ -23,7 +23,12 @@
     </div>
     <div class="mb-3">
         <label for="" class="form-label">Parrain</label>
-        <input type="search" class="form-control" asp-for="Parrain">
+        <select asp-for="ParrainId">
+            @foreach (var utilisateur in ViewBag.Users)
+            {
+                <option value="@utilisateur.Id">@utilisateur.Nom</option>
+            }
+        </select>
     </div>
     <div class="mb-3">
         <label for="" class="form-label">Status</label>
